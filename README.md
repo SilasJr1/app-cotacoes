@@ -5,3 +5,11 @@ Projeto de aplicativo mobile em Flutter para a Disciplina Eletiva Programação 
 ## Autor
 
 Silas Henrique Gonçalves Júnior
+
+## API utilizada
+
+<https://www.alphavantage.co/>
+
+### API Key
+
+***REMOVED***
