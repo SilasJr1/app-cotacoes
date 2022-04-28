@@ -15,6 +15,14 @@ class FormLogin extends StatefulWidget {
 class _FormLoginState extends State<FormLogin> {
   bool _ocultarSenha = true;
 
+  //Declaração das variáveis que serão usadas para armazenar
+  //os dados informados pelo usuário
+  var txtLogin = TextEditingController();
+  var txtSenha = TextEditingController();
+
+  //Declaração de um atributo que identifica unicamente um formulário
+  var formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,83 +32,98 @@ class _FormLoginState extends State<FormLogin> {
           Stack(
             alignment: Alignment.topCenter,
             children: <Widget>[
-              Card(
-                elevation: 2.0,
-                color: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: SizedBox(
-                  width: 300.0,
-                  height: 190.0,
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 20.0, bottom: 20.0, left: 25.0, right: 25.0),
-                        child: TextField(
-                          keyboardType: TextInputType.emailAddress,
-                          style: const TextStyle(
-                              fontSize: 16.0, color: Colors.black),
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            icon: Icon(
-                              FontAwesomeIcons.envelope,
+              Form(
+                key: formKey,
+                child: Card(
+                  elevation: 2.0,
+                  color: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  child: SizedBox(
+                    width: 300.0,
+                    height: 250.0,
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 20.0, bottom: 20.0, left: 25.0, right: 25.0),
+                          child: TextFormField(
+                            controller: txtLogin,
+                            style: const TextStyle(
+                              fontSize: 16.0,
                               color: Colors.black,
-                              size: 22.0,
                             ),
-                            hintText: 'E-mail',
-                            hintStyle: TextStyle(fontSize: 17.0),
+                            decoration: const InputDecoration(
+                              border: InputBorder.none,
+                              icon: Icon(
+                                FontAwesomeIcons.user,
+                                color: Colors.black,
+                                size: 22.0,
+                              ),
+                              hintText: 'Login',
+                              hintStyle: TextStyle(fontSize: 17.0),
+                            ),
+                            //Validação dos dados
+                            validator: (value) {
+                              if (value == null || value == '') {
+                                return 'Preenchimento obrigatório';
+                              } else {
+                                return null;
+                              }
+                            },
                           ),
-                          onSubmitted: (_) {
-                            // focusNodePassword.requestFocus();
-                          },
                         ),
-                      ),
-                      Container(
-                        width: 250.0,
-                        height: 1.0,
-                        color: Colors.grey[400],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 20.0, bottom: 20.0, left: 25.0, right: 25.0),
-                        child: TextField(
-                          obscureText: _ocultarSenha,
-                          style: const TextStyle(
-                              fontSize: 16.0, color: Colors.black),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            icon: const Icon(
-                              FontAwesomeIcons.lock,
-                              size: 22.0,
-                              color: Colors.black,
-                            ),
-                            hintText: 'Senha',
-                            hintStyle: const TextStyle(fontSize: 17.0),
-                            suffixIcon: GestureDetector(
-                              onTap: _toggleLogin,
-                              child: Icon(
-                                _ocultarSenha
-                                    ? FontAwesomeIcons.eye
-                                    : FontAwesomeIcons.eyeSlash,
-                                size: 15.0,
+                        Container(
+                          width: 250.0,
+                          height: 1.0,
+                          color: Colors.grey[400],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 20.0, bottom: 20.0, left: 25.0, right: 25.0),
+                          child: TextFormField(
+                            controller: txtSenha,
+                            obscureText: _ocultarSenha,
+                            style: const TextStyle(
+                                fontSize: 16.0, color: Colors.black),
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              icon: const Icon(
+                                FontAwesomeIcons.lock,
+                                size: 22.0,
                                 color: Colors.black,
                               ),
+                              hintText: 'Senha',
+                              hintStyle: const TextStyle(fontSize: 17.0),
+                              suffixIcon: GestureDetector(
+                                onTap: _toggleSenha,
+                                child: Icon(
+                                  _ocultarSenha
+                                      ? FontAwesomeIcons.eye
+                                      : FontAwesomeIcons.eyeSlash,
+                                  size: 15.0,
+                                  color: Colors.black,
+                                ),
+                              ),
                             ),
+                            //Validação dos dados
+                            validator: (value) {
+                              if (value == null || value == '') {
+                                return 'Preenchimento obrigatório';
+                              } else {
+                                return null;
+                              }
+                            },
                           ),
-                          onSubmitted: (_) {
-                            // _toggleSignInButton();
-                          },
-                          textInputAction: TextInputAction.go,
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 170.0),
+                margin: const EdgeInsets.only(top: 230.0),
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   boxShadow: <BoxShadow>[
@@ -139,7 +162,16 @@ class _FormLoginState extends State<FormLogin> {
                       ),
                     ),
                   ),
-                  onPressed: () => {},
+                  onPressed: () => {
+                    //validar formulário
+                    if (formKey.currentState!.validate())
+                      {
+                        setState(() {
+                          Navigator.pushNamed(context, 'home',
+                              arguments: txtLogin.text);
+                        })
+                      }
+                  },
                 ),
               )
             ],
@@ -236,7 +268,7 @@ class _FormLoginState extends State<FormLogin> {
     );
   }
 
-  void _toggleLogin() {
+  void _toggleSenha() {
     setState(() {
       _ocultarSenha = !_ocultarSenha;
     });
