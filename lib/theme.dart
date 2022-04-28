@@ -5,8 +5,6 @@ class CustomTheme {
 
   static const Color loginGradientStart = Color(0xFF03FE91);
   static const Color loginGradientEnd = Color(0xFF2EB6F7);
-  static const Color white = Color(0xFFFFFFFF);
-  static const Color black = Color(0xFF000000);
 
   static const LinearGradient primaryGradient = LinearGradient(
     colors: <Color>[loginGradientStart, loginGradientEnd],
