@@ -44,9 +44,7 @@ class _FormCadastroState extends State<FormCadastro> {
                           textCapitalization: TextCapitalization.words,
                           autocorrect: false,
                           style: const TextStyle(
-                              fontFamily: 'WorkSansSemiBold',
-                              fontSize: 16.0,
-                              color: Colors.black),
+                              fontSize: 16.0, color: Colors.black),
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             icon: Icon(
@@ -55,7 +53,8 @@ class _FormCadastroState extends State<FormCadastro> {
                             ),
                             hintText: 'Nome',
                             hintStyle: TextStyle(
-                                fontFamily: 'WorkSansSemiBold', fontSize: 16.0),
+                              fontSize: 16.0,
+                            ),
                           ),
                           onSubmitted: (_) {},
                         ),
@@ -72,9 +71,7 @@ class _FormCadastroState extends State<FormCadastro> {
                           keyboardType: TextInputType.emailAddress,
                           autocorrect: false,
                           style: const TextStyle(
-                              fontFamily: 'WorkSansSemiBold',
-                              fontSize: 16.0,
-                              color: Colors.black),
+                              fontSize: 16.0, color: Colors.black),
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             icon: Icon(
@@ -83,7 +80,8 @@ class _FormCadastroState extends State<FormCadastro> {
                             ),
                             hintText: 'E-mail',
                             hintStyle: TextStyle(
-                                fontFamily: 'WorkSansSemiBold', fontSize: 16.0),
+                              fontSize: 16.0,
+                            ),
                           ),
                           onSubmitted: (_) {},
                         ),
@@ -100,9 +98,7 @@ class _FormCadastroState extends State<FormCadastro> {
                           obscureText: _ocultarSenha,
                           autocorrect: false,
                           style: const TextStyle(
-                              fontFamily: 'WorkSansSemiBold',
-                              fontSize: 16.0,
-                              color: Colors.black),
+                              fontSize: 16.0, color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             icon: const Icon(
@@ -111,7 +107,8 @@ class _FormCadastroState extends State<FormCadastro> {
                             ),
                             hintText: 'Senha',
                             hintStyle: const TextStyle(
-                                fontFamily: 'WorkSansSemiBold', fontSize: 16.0),
+                              fontSize: 16.0,
+                            ),
                             suffixIcon: GestureDetector(
                               onTap: _toggleSenha,
                               child: Icon(
@@ -138,9 +135,7 @@ class _FormCadastroState extends State<FormCadastro> {
                           obscureText: _ocultarConfirmacaoSenha,
                           autocorrect: false,
                           style: const TextStyle(
-                              fontFamily: 'WorkSansSemiBold',
-                              fontSize: 16.0,
-                              color: Colors.black),
+                              fontSize: 16.0, color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             icon: const Icon(
@@ -149,7 +144,8 @@ class _FormCadastroState extends State<FormCadastro> {
                             ),
                             hintText: 'Confirmação de senha',
                             hintStyle: const TextStyle(
-                                fontFamily: 'WorkSansSemiBold', fontSize: 16.0),
+                              fontSize: 16.0,
+                            ),
                             suffixIcon: GestureDetector(
                               onTap: _toggleConfirmacaoSenha,
                               child: Icon(
@@ -207,9 +203,9 @@ class _FormCadastroState extends State<FormCadastro> {
                     child: Text(
                       'CADASTRAR',
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 25.0,
-                          fontFamily: 'WorkSansBold'),
+                        color: Colors.white,
+                        fontSize: 25.0,
+                      ),
                     ),
                   ),
                   onPressed: () => _toggleCadastrarButton(),

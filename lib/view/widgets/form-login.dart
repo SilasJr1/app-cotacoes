@@ -41,9 +41,7 @@ class _FormLoginState extends State<FormLogin> {
                         child: TextField(
                           keyboardType: TextInputType.emailAddress,
                           style: const TextStyle(
-                              fontFamily: 'WorkSansSemiBold',
-                              fontSize: 16.0,
-                              color: Colors.black),
+                              fontSize: 16.0, color: Colors.black),
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             icon: Icon(
@@ -52,8 +50,7 @@ class _FormLoginState extends State<FormLogin> {
                               size: 22.0,
                             ),
                             hintText: 'E-mail',
-                            hintStyle: TextStyle(
-                                fontFamily: 'WorkSansSemiBold', fontSize: 17.0),
+                            hintStyle: TextStyle(fontSize: 17.0),
                           ),
                           onSubmitted: (_) {
                             // focusNodePassword.requestFocus();
@@ -71,9 +68,7 @@ class _FormLoginState extends State<FormLogin> {
                         child: TextField(
                           obscureText: _ocultarSenha,
                           style: const TextStyle(
-                              fontFamily: 'WorkSansSemiBold',
-                              fontSize: 16.0,
-                              color: Colors.black),
+                              fontSize: 16.0, color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             icon: const Icon(
@@ -82,8 +77,7 @@ class _FormLoginState extends State<FormLogin> {
                               color: Colors.black,
                             ),
                             hintText: 'Senha',
-                            hintStyle: const TextStyle(
-                                fontFamily: 'WorkSansSemiBold', fontSize: 17.0),
+                            hintStyle: const TextStyle(fontSize: 17.0),
                             suffixIcon: GestureDetector(
                               onTap: _toggleLogin,
                               child: Icon(
@@ -140,9 +134,9 @@ class _FormLoginState extends State<FormLogin> {
                     child: Text(
                       'LOGIN',
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 25.0,
-                          fontFamily: 'WorkSansBold'),
+                        color: Colors.white,
+                        fontSize: 25.0,
+                      ),
                     ),
                   ),
                   onPressed: () => {},
@@ -157,10 +151,10 @@ class _FormLoginState extends State<FormLogin> {
                 child: const Text(
                   'Esqueci minha senha',
                   style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      color: Colors.white,
-                      fontSize: 16.0,
-                      fontFamily: 'WorkSansMedium'),
+                    decoration: TextDecoration.underline,
+                    color: Colors.white,
+                    fontSize: 16.0,
+                  ),
                 )),
           ),
           Row(
