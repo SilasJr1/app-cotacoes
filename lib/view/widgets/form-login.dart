@@ -11,7 +11,7 @@ class FormLogin extends StatefulWidget {
 }
 
 class _FormLoginState extends State<FormLogin> {
-  bool _obscureTextPassword = true;
+  bool _ocultarSenha = true;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class _FormLoginState extends State<FormLogin> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
-                child: Container(
+                child: SizedBox(
                   width: 300.0,
                   height: 190.0,
                   child: Column(
@@ -67,7 +67,7 @@ class _FormLoginState extends State<FormLogin> {
                         padding: const EdgeInsets.only(
                             top: 20.0, bottom: 20.0, left: 25.0, right: 25.0),
                         child: TextField(
-                          obscureText: _obscureTextPassword,
+                          obscureText: _ocultarSenha,
                           style: const TextStyle(
                               fontFamily: 'WorkSansSemiBold',
                               fontSize: 16.0,
@@ -85,7 +85,7 @@ class _FormLoginState extends State<FormLogin> {
                             suffixIcon: GestureDetector(
                               onTap: _toggleLogin,
                               child: Icon(
-                                _obscureTextPassword
+                                _ocultarSenha
                                     ? FontAwesomeIcons.eye
                                     : FontAwesomeIcons.eyeSlash,
                                 size: 15.0,
@@ -161,85 +161,60 @@ class _FormLoginState extends State<FormLogin> {
                       fontFamily: 'WorkSansMedium'),
                 )),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                        colors: <Color>[
-                          Colors.white10,
-                          Colors.white,
-                        ],
-                        begin: FractionalOffset(0.0, 0.0),
-                        end: FractionalOffset(1.0, 1.0),
-                        stops: <double>[0.0, 1.0],
-                        tileMode: TileMode.clamp),
-                  ),
-                  width: 100.0,
-                  height: 1.0,
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 15.0, right: 15.0),
-                ),
-                Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                        colors: <Color>[
-                          Colors.white,
-                          Colors.white10,
-                        ],
-                        begin: FractionalOffset(0.0, 0.0),
-                        end: FractionalOffset(1.0, 1.0),
-                        stops: <double>[0.0, 1.0],
-                        tileMode: TileMode.clamp),
-                  ),
-                  width: 100.0,
-                  height: 1.0,
-                ),
-              ],
-            ),
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(top: 10.0, right: 40.0),
-                child: GestureDetector(
-                  // onTap: () => CustomSnackBar(
-                  //     context, const Text('Facebook button pressed')),
-                  child: Container(
-                    padding: const EdgeInsets.all(15.0),
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
+                child: TextButton(
+                    child: Container(
+                      padding: const EdgeInsets.all(15.0),
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                      ),
+                      child: const Icon(
+                        FontAwesomeIcons.facebookF,
+                        color: Color(0xFF0084ff),
+                      ),
                     ),
-                    child: const Icon(
-                      FontAwesomeIcons.facebookF,
-                      color: Color(0xFF0084ff),
-                    ),
-                  ),
-                ),
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: const Text('Login com Facebook acionado!'),
+                          action: SnackBarAction(
+                            label: 'Fechar',
+                            onPressed: () {},
+                          ),
+                        ),
+                      );
+                    }),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10.0),
-                child: GestureDetector(
-                  // onTap: () => CustomSnackBar(
-                  //     context, const Text('Google button pressed')),
-                  child: Container(
-                    padding: const EdgeInsets.all(15.0),
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
+                child: TextButton(
+                    child: Container(
+                      padding: const EdgeInsets.all(15.0),
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                      ),
+                      child: const Icon(
+                        FontAwesomeIcons.google,
+                        color: Colors.red,
+                      ),
                     ),
-                    child: const Icon(
-                      FontAwesomeIcons.google,
-                      color: Color(0xFF0084ff),
-                    ),
-                  ),
-                ),
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: const Text('Login com Google acionado!'),
+                          action: SnackBarAction(
+                            label: 'Fechar',
+                            onPressed: () {},
+                          ),
+                        ),
+                      );
+                    }),
               ),
             ],
           ),
@@ -250,7 +225,7 @@ class _FormLoginState extends State<FormLogin> {
 
   void _toggleLogin() {
     setState(() {
-      _obscureTextPassword = !_obscureTextPassword;
+      _ocultarSenha = !_ocultarSenha;
     });
   }
 }
