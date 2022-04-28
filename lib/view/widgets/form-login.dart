@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -151,7 +153,7 @@ class _FormLoginState extends State<FormLogin> {
           Padding(
             padding: const EdgeInsets.only(top: 10.0),
             child: TextButton(
-                onPressed: () {},
+                onPressed: _esquecerSenhaButton,
                 child: const Text(
                   'Esqueci minha senha',
                   style: TextStyle(
@@ -217,6 +219,23 @@ class _FormLoginState extends State<FormLogin> {
                     }),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _esquecerSenhaButton() {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('Esta função será implementada em breve'),
+        content: const Text(
+            'Qualquer dúvida entre em contato pelo e-mail silas.henrique@gmail.com'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'OK'),
+            child: const Text('OK'),
           ),
         ],
       ),

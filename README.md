@@ -13,7 +13,3 @@ Silas Henrique Gonçalves Júnior
 ## Gerador do logo
 
 <https://looka.com/>
-
-### API Key
-
-***REMOVED***
