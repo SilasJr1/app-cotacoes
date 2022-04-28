@@ -10,6 +10,10 @@ Silas Henrique Gonçalves Júnior
 
 <https://www.alphavantage.co/>
 
+## Gerador do logo
+
+<https://looka.com/>
+
 ### API Key
 
 AVQ32EO2FJ17ZWZF
