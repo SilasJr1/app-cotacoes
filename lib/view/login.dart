@@ -12,9 +12,23 @@ class Login extends StatefulWidget {
   State<Login> createState() => _LoginState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
+  PageController _pageController = PageController();
+
   Color left = Colors.black;
   Color right = Colors.white;
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +66,7 @@ class _LoginState extends State<Login> {
               Expanded(
                 flex: 2,
                 child: PageView(
+                  controller: _pageController,
                   physics: const ClampingScrollPhysics(),
                   onPageChanged: (int i) {
                     FocusScope.of(context).requestFocus(FocusNode());
@@ -102,7 +117,7 @@ class _LoginState extends State<Login> {
               style: ButtonStyle(
                 overlayColor: MaterialStateProperty.all(Colors.transparent),
               ),
-              onPressed: () {},
+              onPressed: _loginButtonPress,
               child: Text(
                 'Login',
                 style: TextStyle(
@@ -112,13 +127,12 @@ class _LoginState extends State<Login> {
               ),
             ),
           ),
-          //Container(height: 33.0, width: 1.0, color: Colors.white),
           Expanded(
             child: TextButton(
               style: ButtonStyle(
                 overlayColor: MaterialStateProperty.all(Colors.transparent),
               ),
-              onPressed: () {},
+              onPressed: _cadastroButtonPress,
               child: Text(
                 'Cadastre-se',
                 style: TextStyle(
@@ -131,5 +145,15 @@ class _LoginState extends State<Login> {
         ],
       ),
     );
+  }
+
+  void _loginButtonPress() {
+    _pageController.animateToPage(0,
+        duration: const Duration(milliseconds: 500), curve: Curves.decelerate);
+  }
+
+  void _cadastroButtonPress() {
+    _pageController.animateToPage(1,
+        duration: const Duration(milliseconds: 500), curve: Curves.decelerate);
   }
 }
