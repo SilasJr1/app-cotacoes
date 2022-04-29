@@ -6,29 +6,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../model/crypto.dart';
+import '../model/currency.dart';
 import '../theme.dart';
 
-class CryptoList extends StatefulWidget {
-  const CryptoList({Key? key}) : super(key: key);
+class CurrencyList extends StatefulWidget {
+  const CurrencyList({Key? key}) : super(key: key);
 
   @override
-  State<CryptoList> createState() => _CryptoListState();
+  State<CurrencyList> createState() => _CurrencyListState();
 }
 
-class _CryptoListState extends State<CryptoList> {
-  //Lista dinâmica para armazenamento de objetos do modelo de dados Crypto
-  List<Crypto> lista = [];
+class _CurrencyListState extends State<CurrencyList> {
+  //Lista dinâmica para armazenamento de objetos do modelo de dados Currency
+  List<Currency> lista = [];
 
   //Carregar um arquivo JSON
   carregarJson() async {
-    final String arquivo = await rootBundle.loadString('lib/data/crypto.json');
+    final String arquivo =
+        await rootBundle.loadString('lib/data/currency.json');
     final data = await jsonDecode(arquivo);
 
     //Percorrer arquivo
     setState(() {
       data.forEach((item) {
-        lista.add(Crypto.fromJson(item));
+        lista.add(Currency.fromJson(item));
       });
     });
   }
@@ -46,7 +47,7 @@ class _CryptoListState extends State<CryptoList> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Criptomoedas',
+          'Moedas',
         ),
         backgroundColor: CustomTheme.loginGradientStart,
         foregroundColor: Colors.black87,
@@ -57,7 +58,7 @@ class _CryptoListState extends State<CryptoList> {
           itemCount: lista.length,
           itemBuilder: (context, index) {
             return ListTile(
-              leading: const Icon(FontAwesomeIcons.coins),
+              leading: const Icon(FontAwesomeIcons.moneyBill1),
               trailing: const Icon(Icons.arrow_right),
               title: Text(lista[index].nome),
               subtitle: Text('Código: ${lista[index].codigo}'),

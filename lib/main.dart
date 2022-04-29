@@ -4,6 +4,8 @@ import 'view/login.dart';
 import 'view/home.dart';
 import 'view/sobre.dart';
 import 'view/crypto-list.dart';
+import 'view/currency-list.dart';
+import 'view/stock-list.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -15,6 +17,8 @@ void main() {
       'home': (context) => Home(),
       'sobre': (context) => Sobre(),
       'crypto': (context) => CryptoList(),
+      'currency': (context) => CurrencyList(),
+      'stock': (context) => StockList(),
     },
   ));
 }
