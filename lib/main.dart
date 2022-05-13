@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 import 'view/login.dart';
 import 'view/home.dart';
@@ -7,7 +9,10 @@ import 'view/crypto-list.dart';
 import 'view/currency-list.dart';
 import 'view/stock-list.dart';
 
-void main() {
+Future<void> main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     title: 'Alpha Assets',
