@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1001806376982",
+    "project_id": "alpha-value-app",
+    "storage_bucket": "alpha-value-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001806376982:android:07e377859e82a8ba5ec537",
+        "android_client_info": {
+          "package_name": "com.example.flutter_cotacoes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1001806376982-pjp4aj2u0b4ksd0lrmb33dgrkn63l1s1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtPFJfh9IS8piLCd4CU1H5zyUlP72B8Ps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1001806376982-pjp4aj2u0b4ksd0lrmb33dgrkn63l1s1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
