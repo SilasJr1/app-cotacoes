@@ -1,5 +1,7 @@
 // ignore_for_file: file_names
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -13,6 +15,9 @@ class FormCadastro extends StatefulWidget {
 }
 
 class _FormCadastroState extends State<FormCadastro> {
+  var txtNome = TextEditingController();
+  var txtEmail = TextEditingController();
+  var txtSenha = TextEditingController();
   bool _ocultarSenha = true;
   bool _ocultarConfirmacaoSenha = true;
 
@@ -37,14 +42,14 @@ class _FormCadastroState extends State<FormCadastro> {
                   child: Column(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(
-                            top: 20.0, bottom: 20.0, left: 25.0, right: 25.0),
+                        padding:
+                            const EdgeInsets.only(top: 20.0, bottom: 20.0, left: 25.0, right: 25.0),
                         child: TextField(
+                          controller: txtNome,
                           keyboardType: TextInputType.text,
                           textCapitalization: TextCapitalization.words,
                           autocorrect: false,
-                          style: const TextStyle(
-                              fontSize: 16.0, color: Colors.black),
+                          style: const TextStyle(fontSize: 16.0, color: Colors.black),
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             icon: Icon(
@@ -56,7 +61,6 @@ class _FormCadastroState extends State<FormCadastro> {
                               fontSize: 16.0,
                             ),
                           ),
-                          onSubmitted: (_) {},
                         ),
                       ),
                       Container(
@@ -65,13 +69,13 @@ class _FormCadastroState extends State<FormCadastro> {
                         color: Colors.grey[400],
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            top: 20.0, bottom: 20.0, left: 25.0, right: 25.0),
+                        padding:
+                            const EdgeInsets.only(top: 20.0, bottom: 20.0, left: 25.0, right: 25.0),
                         child: TextField(
+                          controller: txtEmail,
                           keyboardType: TextInputType.emailAddress,
                           autocorrect: false,
-                          style: const TextStyle(
-                              fontSize: 16.0, color: Colors.black),
+                          style: const TextStyle(fontSize: 16.0, color: Colors.black),
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             icon: Icon(
@@ -83,7 +87,6 @@ class _FormCadastroState extends State<FormCadastro> {
                               fontSize: 16.0,
                             ),
                           ),
-                          onSubmitted: (_) {},
                         ),
                       ),
                       Container(
@@ -92,13 +95,13 @@ class _FormCadastroState extends State<FormCadastro> {
                         color: Colors.grey[400],
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            top: 20.0, bottom: 20.0, left: 25.0, right: 25.0),
+                        padding:
+                            const EdgeInsets.only(top: 20.0, bottom: 20.0, left: 25.0, right: 25.0),
                         child: TextField(
+                          controller: txtSenha,
                           obscureText: _ocultarSenha,
                           autocorrect: false,
-                          style: const TextStyle(
-                              fontSize: 16.0, color: Colors.black),
+                          style: const TextStyle(fontSize: 16.0, color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             icon: const Icon(
@@ -112,15 +115,12 @@ class _FormCadastroState extends State<FormCadastro> {
                             suffixIcon: GestureDetector(
                               onTap: _toggleSenha,
                               child: Icon(
-                                _ocultarSenha
-                                    ? FontAwesomeIcons.eye
-                                    : FontAwesomeIcons.eyeSlash,
+                                _ocultarSenha ? FontAwesomeIcons.eye : FontAwesomeIcons.eyeSlash,
                                 size: 15.0,
                                 color: Colors.black,
                               ),
                             ),
                           ),
-                          onSubmitted: (_) {},
                         ),
                       ),
                       Container(
@@ -129,13 +129,12 @@ class _FormCadastroState extends State<FormCadastro> {
                         color: Colors.grey[400],
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            top: 20.0, bottom: 20.0, left: 25.0, right: 25.0),
+                        padding:
+                            const EdgeInsets.only(top: 20.0, bottom: 20.0, left: 25.0, right: 25.0),
                         child: TextField(
                           obscureText: _ocultarConfirmacaoSenha,
                           autocorrect: false,
-                          style: const TextStyle(
-                              fontSize: 16.0, color: Colors.black),
+                          style: const TextStyle(fontSize: 16.0, color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             icon: const Icon(
@@ -157,9 +156,7 @@ class _FormCadastroState extends State<FormCadastro> {
                               ),
                             ),
                           ),
-                          onSubmitted: (_) {
-                            _toggleCadastrarButton();
-                          },
+                          onSubmitted: (_) {},
                           textInputAction: TextInputAction.go,
                         ),
                       ),
@@ -184,10 +181,7 @@ class _FormCadastroState extends State<FormCadastro> {
                     ),
                   ],
                   gradient: LinearGradient(
-                      colors: <Color>[
-                        CustomTheme.loginGradientEnd,
-                        CustomTheme.loginGradientStart
-                      ],
+                      colors: <Color>[CustomTheme.loginGradientEnd, CustomTheme.loginGradientStart],
                       begin: FractionalOffset(0.2, 0.2),
                       end: FractionalOffset(1.0, 1.0),
                       stops: <double>[0.0, 1.0],
@@ -198,8 +192,7 @@ class _FormCadastroState extends State<FormCadastro> {
                   splashColor: CustomTheme.loginGradientEnd,
                   //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
                   child: const Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
+                    padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
                     child: Text(
                       'CADASTRAR',
                       style: TextStyle(
@@ -208,7 +201,7 @@ class _FormCadastroState extends State<FormCadastro> {
                       ),
                     ),
                   ),
-                  onPressed: () => _toggleCadastrarButton(),
+                  onPressed: () => criarConta(txtNome.text, txtEmail.text, txtSenha.text),
                 ),
               )
             ],
@@ -218,20 +211,55 @@ class _FormCadastroState extends State<FormCadastro> {
     );
   }
 
-  void _toggleCadastrarButton() {
+  void popup(String title, String msg, bool success) {
     showDialog<String>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: const Text('CADASTRO EFETUADO COM SUCESSO!'),
-        content: const Text('Seja bem-vindo(a)!'),
+        title: Text(title),
+        content: Text(msg),
         actions: <Widget>[
           TextButton(
-            onPressed: () => Navigator.pop(context, 'OK'),
+            onPressed: () {
+              if (success) {
+                Navigator.pushNamed(context, 'login');
+              } else {
+                Navigator.pop(context, 'OK');
+              }
+            },
             child: const Text('OK'),
           ),
         ],
       ),
     );
+  }
+
+  //
+  // CRIAR CONTA no Firebase Auth
+  //
+  void criarConta(nome, email, senha) {
+    FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: senha).then((res) {
+      //Armazenar o nome no Firestore
+      FirebaseFirestore.instance.collection('usuarios').add({
+        "uid": res.user!.uid.toString(),
+        "nome": nome,
+      });
+      popup('Usuário criado com sucesso', 'Seja bem-vindo(a)!', true);
+    }).catchError((e) {
+      switch (e.code) {
+        case 'email-already-in-use':
+          popup('Erro ao cadastrar usuário', 'O e-mail já foi cadastrado!', false);
+          break;
+        case 'invalid-email':
+          popup('Erro ao cadastrar usuário', 'E-mail inválido!', false);
+          break;
+        case 'weak-password':
+          popup('Erro ao cadastrar usuário', 'A senha deve conter no mínimo 6 dígitos', false);
+          break;
+        default:
+          popup('Erro ao cadastrar usuário', e.code.toString(), false);
+          break;
+      }
+    });
   }
 
   void _toggleSenha() {

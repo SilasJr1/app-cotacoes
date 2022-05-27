@@ -57,11 +57,11 @@ class _FormLoginState extends State<FormLogin> {
                             decoration: const InputDecoration(
                               border: InputBorder.none,
                               icon: Icon(
-                                FontAwesomeIcons.user,
+                                FontAwesomeIcons.envelope,
                                 color: Colors.black,
                                 size: 22.0,
                               ),
-                              hintText: 'Login',
+                              hintText: 'E-mail',
                               hintStyle: TextStyle(fontSize: 17.0),
                             ),
                             //Validação dos dados
@@ -85,8 +85,7 @@ class _FormLoginState extends State<FormLogin> {
                           child: TextFormField(
                             controller: txtSenha,
                             obscureText: _ocultarSenha,
-                            style: const TextStyle(
-                                fontSize: 16.0, color: Colors.black),
+                            style: const TextStyle(fontSize: 16.0, color: Colors.black),
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               icon: const Icon(
@@ -99,9 +98,7 @@ class _FormLoginState extends State<FormLogin> {
                               suffixIcon: GestureDetector(
                                 onTap: _toggleSenha,
                                 child: Icon(
-                                  _ocultarSenha
-                                      ? FontAwesomeIcons.eye
-                                      : FontAwesomeIcons.eyeSlash,
+                                  _ocultarSenha ? FontAwesomeIcons.eye : FontAwesomeIcons.eyeSlash,
                                   size: 15.0,
                                   color: Colors.black,
                                 ),
@@ -139,10 +136,7 @@ class _FormLoginState extends State<FormLogin> {
                     ),
                   ],
                   gradient: LinearGradient(
-                      colors: <Color>[
-                        CustomTheme.loginGradientEnd,
-                        CustomTheme.loginGradientStart
-                      ],
+                      colors: <Color>[CustomTheme.loginGradientEnd, CustomTheme.loginGradientStart],
                       begin: FractionalOffset(0.2, 0.2),
                       end: FractionalOffset(1.0, 1.0),
                       stops: <double>[0.0, 1.0],
@@ -152,8 +146,7 @@ class _FormLoginState extends State<FormLogin> {
                   highlightColor: Colors.transparent,
                   splashColor: CustomTheme.loginGradientEnd,
                   child: const Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
+                    padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
                     child: Text(
                       'LOGIN',
                       style: TextStyle(
@@ -167,8 +160,7 @@ class _FormLoginState extends State<FormLogin> {
                     if (formKey.currentState!.validate())
                       {
                         setState(() {
-                          Navigator.pushNamed(context, 'home',
-                              arguments: txtLogin.text);
+                          Navigator.pushNamed(context, 'home', arguments: txtLogin.text);
                         })
                       }
                   },
@@ -256,8 +248,8 @@ class _FormLoginState extends State<FormLogin> {
       context: context,
       builder: (BuildContext context) => AlertDialog(
         title: const Text('Esta função será implementada em breve'),
-        content: const Text(
-            'Qualquer dúvida entre em contato pelo e-mail silas.henrique@gmail.com'),
+        content:
+            const Text('Qualquer dúvida entre em contato pelo e-mail silas.henrique@gmail.com'),
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.pop(context, 'OK'),
