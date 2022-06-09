@@ -1,34 +1,36 @@
 // ignore_for_file: file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../theme.dart';
+import 'fav-list.dart';
 
-class FavList extends StatefulWidget {
-  const FavList({Key? key}) : super(key: key);
+class PortfolioPage extends StatefulWidget {
+  const PortfolioPage({Key? key}) : super(key: key);
 
   @override
-  State<FavList> createState() => _FavListState();
+  State<PortfolioPage> createState() => _PortfolioPageState();
 }
 
-class _FavListState extends State<FavList> {
-  dynamic carteiras;
+class _PortfolioPageState extends State<PortfolioPage> {
+  dynamic ativos;
 
-  @override
-  void initState() {
-    super.initState();
-    carteiras = FirebaseFirestore.instance
-        .collection('favoritos')
-        .where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid);
+  retornarDocumentosById(id) async {
+    ativos = FirebaseFirestore.instance
+        .collection('ativos')
+        .where('fid', isEqualTo: id);
   }
 
   @override
   Widget build(BuildContext context) {
+    //Recuperar o ID e o nome da carteira
+    final args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
+    retornarDocumentosById(args.id);
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Favoritos',
+        title: Text(
+          args.nome,
         ),
         backgroundColor: CustomTheme.loginGradientStart,
         foregroundColor: Colors.black87,
@@ -36,7 +38,7 @@ class _FavListState extends State<FavList> {
           icon: const Icon(Icons.arrow_back),
           color: Colors.black,
           onPressed: () {
-            Navigator.pushNamed(context, 'home');
+            Navigator.pushNamed(context, 'fav');
           },
         ),
       ),
@@ -47,7 +49,7 @@ class _FavListState extends State<FavList> {
         //
         child: StreamBuilder<QuerySnapshot>(
           //fonte de dados
-          stream: carteiras.snapshots(),
+          stream: ativos.snapshots(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -59,7 +61,7 @@ class _FavListState extends State<FavList> {
                 return ListView.builder(
                   itemCount: dados.size,
                   itemBuilder: (context, index) {
-                    return exibirDocumento(dados.docs[index]);
+                    return exibirDocumento(dados.docs[index], args);
                   },
                 );
             }
@@ -71,25 +73,30 @@ class _FavListState extends State<FavList> {
         backgroundColor: CustomTheme.loginGradientStart,
         child: const Icon(Icons.add),
         onPressed: () {
-          Navigator.pushNamed(context, 'inserirCarteira');
+          Navigator.pushNamed(
+            context,
+            'inserirAtivo',
+            arguments: AssetArguments(args.id, '', args.nome),
+          );
         },
       ),
     );
   }
 
-  exibirDocumento(item) {
+  exibirDocumento(item, ScreenArguments args) {
     String nome = item.data()['nome'];
-    String descricao = item.data()['descricao'];
+    String ticker = item.data()['ticker'];
+    String preco = item.data()['preco'];
     return ListTile(
       title: Text(nome),
-      subtitle: Text(descricao),
+      subtitle: Text('Código: $ticker - Cotação atual: $preco'),
       trailing: Wrap(children: <Widget>[
         IconButton(
           onPressed: () {
             Navigator.pushNamed(
               context,
-              'inserirCarteira',
-              arguments: item.id,
+              'inserirAtivo',
+              arguments: AssetArguments(args.id, item.id, args.nome),
             );
           },
           icon: const Icon(Icons.edit),
@@ -97,7 +104,7 @@ class _FavListState extends State<FavList> {
         IconButton(
           onPressed: () {
             FirebaseFirestore.instance
-                .collection('favoritos')
+                .collection('ativos')
                 .doc(item.id)
                 .delete();
             _modalDeletar();
@@ -106,10 +113,13 @@ class _FavListState extends State<FavList> {
         ),
       ]),
 
-      //PASSAR COMO ARGUMENTO O id e o Nome da Carteira
+      //PASSAR COMO ARGUMENTO O id do Ativo
       onTap: () {
-        Navigator.pushNamed(context, 'portfolio',
-            arguments: ScreenArguments(item.id, item.data()['nome']));
+        // Navigator.pushNamed(
+        //   context,
+        //   'asset',
+        //   arguments: item.id,
+        // );
       },
     );
   }
@@ -118,7 +128,7 @@ class _FavListState extends State<FavList> {
     showDialog<String>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: const Text('Carteira deletada com sucesso'),
+        title: const Text('Ativo deletado com sucesso'),
         actions: <Widget>[
           TextButton(
             onPressed: () {
@@ -132,9 +142,10 @@ class _FavListState extends State<FavList> {
   }
 }
 
-class ScreenArguments {
-  final String id;
-  final String nome;
+class AssetArguments {
+  final String idCarteira;
+  final String idAtivo;
+  final String nomeCarteira;
 
-  ScreenArguments(this.id, this.nome);
+  AssetArguments(this.idCarteira, this.idAtivo, this.nomeCarteira);
 }

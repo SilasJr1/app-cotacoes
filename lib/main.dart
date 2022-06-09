@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
+import 'view/create-asset-page.dart';
 import 'view/fav-list.dart';
 import 'view/create-portfolio-page.dart';
 import 'view/login.dart';
 import 'view/home.dart';
+import 'view/portfolio-page.dart';
 import 'view/sobre.dart';
 import 'view/crypto-list.dart';
 import 'view/currency-list.dart';
@@ -28,6 +30,8 @@ Future<void> main() async {
       'stock': (context) => const StockList(),
       'fav': (context) => const FavList(),
       'inserirCarteira': (context) => const CreatePortfolioPage(),
+      'portfolio': (context) => const PortfolioPage(),
+      'inserirAtivo': (context) => const CreateAssetPage(),
     },
   ));
 }
