@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cotacoes/view/widgets/popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../theme.dart';
@@ -211,28 +212,6 @@ class _FormCadastroState extends State<FormCadastro> {
     );
   }
 
-  void popup(String title, String msg, bool success) {
-    showDialog<String>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: Text(title),
-        content: Text(msg),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              if (success) {
-                Navigator.pushNamed(context, 'login');
-              } else {
-                Navigator.pop(context, 'OK');
-              }
-            },
-            child: const Text('OK'),
-          ),
-        ],
-      ),
-    );
-  }
-
   //
   // CRIAR CONTA no Firebase Auth
   //
@@ -243,20 +222,21 @@ class _FormCadastroState extends State<FormCadastro> {
         "uid": res.user!.uid.toString(),
         "nome": nome,
       });
-      popup('Usuário criado com sucesso', 'Seja bem-vindo(a)!', true);
+      popup(context, 'Usuário criado com sucesso', 'Seja bem-vindo(a)!', true);
     }).catchError((e) {
       switch (e.code) {
         case 'email-already-in-use':
-          popup('Erro ao cadastrar usuário', 'O e-mail já foi cadastrado!', false);
+          popup(context, 'Erro ao cadastrar usuário', 'O e-mail já foi cadastrado!', false);
           break;
         case 'invalid-email':
-          popup('Erro ao cadastrar usuário', 'E-mail inválido!', false);
+          popup(context, 'Erro ao cadastrar usuário', 'E-mail inválido!', false);
           break;
         case 'weak-password':
-          popup('Erro ao cadastrar usuário', 'A senha deve conter no mínimo 6 dígitos', false);
+          popup(context, 'Erro ao cadastrar usuário', 'A senha deve conter no mínimo 6 dígitos',
+              false);
           break;
         default:
-          popup('Erro ao cadastrar usuário', e.code.toString(), false);
+          popup(context, 'Erro ao cadastrar usuário', e.code.toString(), false);
           break;
       }
     });
