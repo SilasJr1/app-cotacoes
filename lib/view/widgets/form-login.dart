@@ -87,7 +87,8 @@ class _FormLoginState extends State<FormLogin> {
                           child: TextFormField(
                             controller: txtSenha,
                             obscureText: _ocultarSenha,
-                            style: const TextStyle(fontSize: 16.0, color: Colors.black),
+                            style: const TextStyle(
+                                fontSize: 16.0, color: Colors.black),
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               icon: const Icon(
@@ -100,7 +101,9 @@ class _FormLoginState extends State<FormLogin> {
                               suffixIcon: GestureDetector(
                                 onTap: _toggleSenha,
                                 child: Icon(
-                                  _ocultarSenha ? FontAwesomeIcons.eye : FontAwesomeIcons.eyeSlash,
+                                  _ocultarSenha
+                                      ? FontAwesomeIcons.eye
+                                      : FontAwesomeIcons.eyeSlash,
                                   size: 15.0,
                                   color: Colors.black,
                                 ),
@@ -138,7 +141,10 @@ class _FormLoginState extends State<FormLogin> {
                     ),
                   ],
                   gradient: LinearGradient(
-                      colors: <Color>[CustomTheme.loginGradientEnd, CustomTheme.loginGradientStart],
+                      colors: <Color>[
+                        CustomTheme.loginGradientEnd,
+                        CustomTheme.loginGradientStart
+                      ],
                       begin: FractionalOffset(0.2, 0.2),
                       end: FractionalOffset(1.0, 1.0),
                       stops: <double>[0.0, 1.0],
@@ -148,7 +154,8 @@ class _FormLoginState extends State<FormLogin> {
                   highlightColor: Colors.transparent,
                   splashColor: CustomTheme.loginGradientEnd,
                   child: const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 42.0),
                     child: Text(
                       'LOGIN',
                       style: TextStyle(
@@ -161,9 +168,11 @@ class _FormLoginState extends State<FormLogin> {
                     //validar formulário
                     if (formKey.currentState!.validate())
                       {
-                        setState(() {
-                          Navigator.pushNamed(context, 'home', arguments: txtLogin.text);
-                        })
+                        login(txtLogin.text, txtSenha.text)
+                        // setState(() {
+                        //   Navigator.pushNamed(context, 'home',
+                        //       arguments: txtLogin.text);
+                        // })
                       }
                   },
                 ),
@@ -248,35 +257,42 @@ class _FormLoginState extends State<FormLogin> {
   //
   // LOGIN com Firebase Auth
   //
-  // void login(email, senha) {
-  //   FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: senha).then((res) {
-  //     popup(context, 'Usuário autenticado com sucesso!');
-  //     Navigator.pushReplacementNamed(context, 'principal');
-  //   }).catchError((e) {
-  //     switch (e.code) {
-  //       case 'invalid-email':
-  //         erro(context, 'O formato do e-mail é inválido');
-  //         break;
-  //       case 'user-not-found':
-  //         erro(context, 'Usuário não encontrado.');
-  //         break;
-  //       case 'wrong-password':
-  //         erro(context, 'Senha incorreta.');
-  //         break;
-  //       default:
-  //         erro(context, e.code.toString());
-  //         break;
-  //     }
-  //   });
-  // }
+  void login(email, senha) {
+    FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: senha)
+        .then((res) {
+      popup(context, 'Usuário autenticado com sucesso!', 'Seja bem-vindo(a)!',
+          true);
+      Navigator.pushReplacementNamed(context, 'home');
+    }).catchError((e) {
+      switch (e.code) {
+        case 'invalid-email':
+          popup(context, 'Erro ao autentificar usuário.',
+              'O formato do e-mail é inválido', false);
+          break;
+        case 'user-not-found':
+          popup(context, 'Erro ao autentificar usuário.',
+              'Usuário não encontrado.', false);
+          break;
+        case 'wrong-password':
+          popup(context, 'Erro ao autentificar usuário.', 'Senha incorreta.',
+              false);
+          break;
+        default:
+          popup(context, 'Erro ao autentificar usuário.', e.code.toString(),
+              false);
+          break;
+      }
+    });
+  }
 
   void _esquecerSenhaButton() {
     showDialog<String>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
         title: const Text('Esta função será implementada em breve'),
-        content:
-            const Text('Qualquer dúvida entre em contato pelo e-mail silas.henrique@gmail.com'),
+        content: const Text(
+            'Qualquer dúvida entre em contato pelo e-mail silas.henrique@gmail.com'),
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.pop(context, 'OK'),

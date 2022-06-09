@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -11,11 +13,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  String nomeUsuario = "";
+
   @override
   Widget build(BuildContext context) {
     //Receber o argumento passado como parâmetro
-    final String nome = ModalRoute.of(context)!.settings.arguments as String;
-    // const String nome = "Silas";
+    // final String nomeUsuario = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
       appBar: AppBar(
@@ -24,10 +27,30 @@ class _HomeState extends State<Home> {
         leading: const Icon(
           Icons.home,
         ),
-        title: Text(
-          'Olá, ' + nome,
+        title: FutureBuilder(
+          future: retornarUsuarioLogado(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return const CircularProgressIndicator();
+            } else {
+              return Text(
+                'Olá, ' + nomeUsuario,
+                // style: const TextStyle(fontSize: 12),
+              );
+            }
+          },
         ),
         backgroundColor: CustomTheme.loginGradientStart,
+        actions: [
+          IconButton(
+            tooltip: 'Sair',
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+              Navigator.pushReplacementNamed(context, 'login');
+            },
+            icon: const Icon(Icons.logout),
+          ),
+        ],
       ),
       body: Container(
         width: double.infinity,
@@ -155,5 +178,21 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
+  }
+
+  retornarUsuarioLogado() async {
+    var uid = FirebaseAuth.instance.currentUser!.uid;
+
+    await FirebaseFirestore.instance
+        .collection('usuarios')
+        .where('uid', isEqualTo: uid)
+        .get()
+        .then((q) {
+      if (q.docs.isNotEmpty) {
+        nomeUsuario = q.docs[0].data()['nome'];
+      } else {
+        nomeUsuario = "NENHUM";
+      }
+    });
   }
 }
