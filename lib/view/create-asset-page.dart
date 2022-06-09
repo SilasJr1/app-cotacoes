@@ -66,7 +66,7 @@ class _CreateAssetPageState extends State<CreateAssetPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  width: 150,
+                  width: 100,
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
                       primary: Colors.black87,
@@ -99,7 +99,7 @@ class _CreateAssetPageState extends State<CreateAssetPage> {
                 ),
                 const SizedBox(width: 10),
                 SizedBox(
-                  width: 150,
+                  width: 100,
                   child: OutlinedButton(
                       style: OutlinedButton.styleFrom(
                         primary: Colors.black87,

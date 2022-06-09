@@ -57,7 +57,7 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  width: 150,
+                  width: 100,
                   child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
                       primary: Colors.black87,
@@ -88,7 +88,7 @@ class _CreatePortfolioPageState extends State<CreatePortfolioPage> {
                 ),
                 const SizedBox(width: 10),
                 SizedBox(
-                  width: 150,
+                  width: 100,
                   child: OutlinedButton(
                       style: OutlinedButton.styleFrom(
                         primary: Colors.black87,
