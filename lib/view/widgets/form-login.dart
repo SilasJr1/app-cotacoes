@@ -1,6 +1,8 @@
 // ignore_for_file: file_names
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cotacoes/view/widgets/popup.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../theme.dart';
@@ -242,6 +244,31 @@ class _FormLoginState extends State<FormLogin> {
       ),
     );
   }
+
+  //
+  // LOGIN com Firebase Auth
+  //
+  // void login(email, senha) {
+  //   FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: senha).then((res) {
+  //     popup(context, 'Usuário autenticado com sucesso!');
+  //     Navigator.pushReplacementNamed(context, 'principal');
+  //   }).catchError((e) {
+  //     switch (e.code) {
+  //       case 'invalid-email':
+  //         erro(context, 'O formato do e-mail é inválido');
+  //         break;
+  //       case 'user-not-found':
+  //         erro(context, 'Usuário não encontrado.');
+  //         break;
+  //       case 'wrong-password':
+  //         erro(context, 'Senha incorreta.');
+  //         break;
+  //       default:
+  //         erro(context, e.code.toString());
+  //         break;
+  //     }
+  //   });
+  // }
 
   void _esquecerSenhaButton() {
     showDialog<String>(
