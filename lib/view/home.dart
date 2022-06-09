@@ -64,6 +64,34 @@ class _HomeState extends State<Home> {
                 margin: const EdgeInsets.only(top: 10, bottom: 10),
                 child: ElevatedButton.icon(
                   onPressed: () {
+                    Navigator.pushNamed(context, 'fav');
+                  },
+                  icon: const Icon(
+                    FontAwesomeIcons.star,
+                    color: Colors.black87,
+                    size: 48,
+                  ),
+                  label: const Text(
+                    ' Favoritos',
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.yellow,
+                    fixedSize: Size(
+                      MediaQuery.of(context).size.width * 0.65,
+                      MediaQuery.of(context).size.height * 0.25,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10, bottom: 10),
+                child: ElevatedButton.icon(
+                  onPressed: () {
                     Navigator.pushNamed(context, 'currency');
                   },
                   icon: const Icon(
@@ -101,7 +129,7 @@ class _HomeState extends State<Home> {
                     size: 48,
                   ),
                   label: const Text(
-                    'Ações',
+                    ' Ações',
                     style: TextStyle(
                       color: Colors.black87,
                       fontSize: 24,
@@ -129,7 +157,7 @@ class _HomeState extends State<Home> {
                     size: 48,
                   ),
                   label: const Text(
-                    'Criptomoedas',
+                    ' Criptomoedas',
                     style: TextStyle(
                       color: Colors.black87,
                       fontSize: 24,
@@ -157,7 +185,7 @@ class _HomeState extends State<Home> {
                     size: 48,
                   ),
                   label: const Text(
-                    'Sobre o App',
+                    ' Sobre o App',
                     style: TextStyle(
                       color: Colors.black87,
                       fontSize: 24,
