@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
+import 'view/fav-list.dart';
+import 'view/create-portfolio-page.dart';
 import 'view/login.dart';
 import 'view/home.dart';
 import 'view/sobre.dart';
@@ -18,12 +20,14 @@ Future<void> main() async {
     title: 'Alpha Assets',
     initialRoute: 'login',
     routes: {
-      'login': (context) => Login(),
-      'home': (context) => Home(),
-      'sobre': (context) => Sobre(),
-      'crypto': (context) => CryptoList(),
-      'currency': (context) => CurrencyList(),
-      'stock': (context) => StockList(),
+      'login': (context) => const Login(),
+      'home': (context) => const Home(),
+      'sobre': (context) => const Sobre(),
+      'crypto': (context) => const CryptoList(),
+      'currency': (context) => const CurrencyList(),
+      'stock': (context) => const StockList(),
+      'fav': (context) => const FavList(),
+      'inserirCarteira': (context) => const CreatePortfolioPage(),
     },
   ));
 }
